@@ -21,17 +21,33 @@ const milestones = [
 
 const values = [
   {
-    icon: <Lightbulb className="h-6 w-6 text-blue-500" />,
+    icon: (
+      <div className="animate-flicker">
+        <Lightbulb className="h-6 w-6 text-yellow-500 transition-all duration-100" />
+      </div>
+    ),
     title: 'Innovation First',
     description: 'Pushing the boundaries of what\'s possible in AI research.'
   },
   {
-    icon: <Target className="h-6 w-6 text-blue-500" />,
+    icon: (
+      <div className="animate-pulse-grow">
+        <div className="relative">
+          <Target className="h-6 w-6 text-blue-500" />
+          <div className="absolute inset-0 animate-ripple rounded-full border-2 border-blue-500/50"></div>
+          <div className="absolute inset-0 animate-ripple delay-300 rounded-full border-2 border-blue-500/50"></div>
+        </div>
+      </div>
+    ),
     title: 'Impact Driven',
     description: 'Creating solutions that make a real difference in the world.'
   },
   {
-    icon: <Users className="h-6 w-6 text-blue-500" />,
+    icon: (
+      <div className="animate-wave">
+        <span className="text-2xl">🤝</span>
+      </div>
+    ),
     title: 'Collaborative Spirit',
     description: 'Working together to achieve breakthrough results.'
   }
@@ -41,11 +57,12 @@ const teamMembers = [
   {
     name: 'Spestly',
     role: 'Diffusion Model Engineer',
-    image: '/team/spestly-ody.png', // Add actual image paths
+    image: '/team/spestly-ody.png',
     bio: 'Spestly is a deep learning engineer with a passion for creating cutting-edge AI models.',
     social: {
       github: 'https://github.com/Aayan-Mishra',
-    }
+    },
+    hoverEffect: 'hover:scale-105 hover:rotate-1 hover:shadow-xl hover:shadow-red-500/20'
   },
   {
     name: 'Adversing',
@@ -54,7 +71,8 @@ const teamMembers = [
     bio: 'Adversing is a deep learning engineer with a passion for creating cutting-edge AI models.',
     social: {
       github: 'https://github.com/Adversing',
-    }
+    },
+    hoverEffect: 'hover:-translate-y-2 hover:shadow-lg hover:shadow-blue-500/20'
   },
   {
     name: 'macintosh',
@@ -63,15 +81,16 @@ const teamMembers = [
     bio: 'macintosh is a machine learning engineer with a passion for creating cutting-edge AI models.',
     social: {
       github: 'https://github.com/maciint0sh',
-    }
+    },
+    hoverEffect: 'hover:scale-[1.02] hover:-rotate-1 hover:shadow-lg hover:shadow-cyan-500/20'
   },
   {
     name: 'Ramo',
     role: 'Creative Director',
     image: 'team/8fb0619308eb4976aec5f371ba691f8a.png',
     bio: 'Ramo is a creative director with a passion for creating innovative AI models.',
-    social: {
-    }
+    social: {},
+    hoverEffect: 'hover:translate-x-1 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-500/20'
   },
   {
     name: 'Specter',
@@ -80,16 +99,18 @@ const teamMembers = [
     bio: 'Specter is a data scientist with a passion for creating innovative AI models.',
     social: {
       github: 'https://github.com/Aby-ss',
-    }
+    },
+    hoverEffect: 'hover:scale-105 hover:shadow-lg hover:shadow-rose-500/20'
   },
   {
     name: 'Dark25',
-    role: ' ',
+    role: 'External Research Engineer',
     image: 'team/69cee180fb158434697982c71fa4ea0a.png',
     bio: 'Dark25 has a passion for creating innovative AI models.',
     social: {
       github: 'https://github.com/ruben-david-roy',
-    }
+    },
+    hoverEffect: 'hover:-translate-y-1 hover:translate-x-1 hover:shadow-lg hover:shadow-purple-500/20'
   }
 ];
 
@@ -153,8 +174,15 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold mb-12 text-center">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((value, index) => (
-              <div key={index} className="p-6 bg-black/40 rounded-xl border border-white/10">
-                <div className="mb-4">{value.icon}</div>
+              <div 
+                key={index} 
+                className="p-6 bg-black/40 rounded-xl border border-white/10 hover:border-white/20 transition-all"
+              >
+                <div className="mb-4">
+                  <div className="p-3 rounded-xl bg-white/5 backdrop-blur-sm inline-block">
+                    {value.icon}
+                  </div>
+                </div>
                 <h3 className="text-xl font-bold mb-2">{value.title}</h3>
                 <p className="text-gray-300">{value.description}</p>
               </div>
@@ -169,7 +197,10 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold mb-12 text-center">Our Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
-              <div key={index} className="p-6 bg-black/20 rounded-xl border border-white/10">
+              <div 
+                key={index} 
+                className={`p-6 bg-black/20 rounded-xl border border-white/10 transition-all duration-300 ${member.hoverEffect}`}
+              >
                 <div className="mb-6">
                   <img
                     src={member.image}
@@ -182,22 +213,16 @@ export default function AboutPage() {
                   <p className="text-blue-400 mb-3">{member.role}</p>
                   <p className="text-gray-300 mb-4">{member.bio}</p>
                   <div className="flex justify-center gap-4">
-                    <a 
-                      href={member.social.github} 
-                      className="text-gray-400 hover:text-white"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="h-5 w-5" />
-                    </a>
-                    <a 
-                      href={member.social.linkedin} 
-                      className="text-gray-400 hover:text-white"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Linkedin className="h-5 w-5" />
-                    </a>
+                    {member.social.github && (
+                      <a 
+                        href={member.social.github} 
+                        className="text-gray-400 hover:text-white"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Github className="h-5 w-5" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

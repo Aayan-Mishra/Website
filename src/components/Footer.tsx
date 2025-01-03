@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
 
 export default function Footer() {
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 5000); // Hide message after 5 seconds
+  };
+
   return (
     <footer className="bg-black/80 border-t border-white/10 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,7 +43,7 @@ export default function Footer() {
                 <Github className="h-5 w-5" />
               </a>
               <a 
-                href="https://twitter.com/odysseylabs" 
+                href="" 
                 className="text-gray-400 hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -43,7 +51,7 @@ export default function Footer() {
                 <Twitter className="h-5 w-5" />
               </a>
               <a 
-                href="mailto:contact@odysseylabs.ai" 
+                href="mailto:odysseylabs.ai@proton.me" 
                 className="text-gray-400 hover:text-white"
               >
                 <Mail className="h-5 w-5" />
@@ -53,15 +61,23 @@ export default function Footer() {
           
           <div>
             <h4 className="text-white font-semibold mb-4">Newsletter</h4>
-            <form className="space-y-2">
+            <form onSubmit={handleSubscribe} className="space-y-2">
               <input
                 type="email"
                 placeholder="Enter your email"
                 className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors">
+              <button 
+                type="submit"
+                className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+              >
                 Subscribe
               </button>
+              {showMessage && (
+                <p className="text-sm text-gray-400 mt-2 animate-fade-in">
+                  🚧 Uh oh, We don't have this setup yet. Sorry!
+                </p>
+              )}
             </form>
           </div>
         </div>
