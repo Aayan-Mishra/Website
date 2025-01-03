@@ -103,9 +103,9 @@ const teamMembers = [
     hoverEffect: 'hover:scale-105 hover:shadow-lg hover:shadow-rose-500/20'
   },
   {
-    name: 'Dark25',
+    name: 'Ruben Roy',
     role: 'External Research Engineer',
-    image: 'team/69cee180fb158434697982c71fa4ea0a.png',
+    image: 'team/ruben.jpg',
     bio: 'Dark25 has a passion for creating innovative AI models.',
     social: {
       github: 'https://github.com/ruben-david-roy',
